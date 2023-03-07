@@ -6,6 +6,7 @@ package main;
 
 import classes.*;
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -15,13 +16,15 @@ import java.util.logging.Logger;
  */
 public class frmMain extends javax.swing.JFrame {
     
-    DataTracker rastreador = new DataTracker("guatemala");
+    DataTracker rastreador = new DataTracker("guatemala"); // objeto que busca los datos de un país
+    Reloj horaSistema = new Reloj(); // hilo que muestra la hora del sistema
 
     /**
      * Creates new form frmMain
      */
     public frmMain() {
         initComponents();
+        horaSistema.start();
     }
 
     /**
@@ -39,6 +42,7 @@ public class frmMain extends javax.swing.JFrame {
         btnObtenerFecha = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         lblFechaPrimerCaso = new javax.swing.JLabel();
+        lblHoraSistema = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -58,6 +62,8 @@ public class frmMain extends javax.swing.JFrame {
 
         lblFechaPrimerCaso.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         lblFechaPrimerCaso.setText("?? de ?? del ????");
+
+        lblHoraSistema.setText("Hora del Sistema");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -80,6 +86,10 @@ public class frmMain extends javax.swing.JFrame {
                         .addGap(87, 87, 87)
                         .addComponent(lblFechaPrimerCaso)))
                 .addContainerGap(38, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(lblHoraSistema)
+                .addGap(61, 61, 61))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -96,7 +106,9 @@ public class frmMain extends javax.swing.JFrame {
                 .addComponent(jLabel3)
                 .addGap(36, 36, 36)
                 .addComponent(lblFechaPrimerCaso)
-                .addContainerGap(60, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                .addComponent(lblHoraSistema)
+                .addContainerGap())
         );
 
         pack();
@@ -147,6 +159,38 @@ public class frmMain extends javax.swing.JFrame {
             }
         });
     }
+    
+    // clase para la hora del sistema. ¡No modificar!
+    public class Reloj extends Thread {
+        Calendar calendario;
+        
+        @Override
+        public void run() {
+            while (true) {
+                String horaSistema = "";
+                calendario = Calendar.getInstance();
+                if (calendario.get(Calendar.HOUR_OF_DAY)<10)
+                    horaSistema += String.valueOf("0"+calendario.get(Calendar.HOUR_OF_DAY)) + ":";
+                else
+                    horaSistema += String.valueOf(calendario.get(Calendar.HOUR_OF_DAY)) + ":";
+                if (calendario.get(Calendar.MINUTE)<10)
+                    horaSistema += String.valueOf("0"+calendario.get(Calendar.MINUTE)) + ":";
+                else
+                    horaSistema += String.valueOf(calendario.get(Calendar.MINUTE)) + ":";
+                if (calendario.get(Calendar.SECOND)<10)
+                    horaSistema += String.valueOf("0"+calendario.get(Calendar.SECOND)) + ":";
+                else
+                    horaSistema += String.valueOf(calendario.get(Calendar.SECOND)) + ":";
+                horaSistema += String.valueOf(calendario.get(Calendar.MILLISECOND)) + " hrs";
+                lblHoraSistema.setText(horaSistema);
+                try {
+                    Thread.sleep(1);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(frmMain.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnObtenerFecha;
@@ -154,6 +198,7 @@ public class frmMain extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel lblFechaPrimerCaso;
+    private javax.swing.JLabel lblHoraSistema;
     private javax.swing.JTextField txtPais;
     // End of variables declaration//GEN-END:variables
 }
