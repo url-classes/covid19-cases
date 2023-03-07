@@ -42,10 +42,15 @@
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="87" max="-2" attributes="0"/>
-                      <Component id="lblFechaPrimerCaso" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblFecha" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace pref="38" max="32767" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+              <Component id="lblHoraSistema" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -64,8 +69,10 @@
               <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
               <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
-              <Component id="lblFechaPrimerCaso" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="60" max="32767" attributes="0"/>
+              <Component id="lblFecha" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="38" max="32767" attributes="0"/>
+              <Component id="lblHoraSistema" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -85,6 +92,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtPais">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtPaisActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnObtenerFecha">
       <Properties>
@@ -99,12 +109,17 @@
         <Property name="text" type="java.lang.String" value="El primer caso de Covid-19 se report&#xf3; el:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="lblFechaPrimerCaso">
+    <Component class="javax.swing.JLabel" name="lblFecha">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="36" style="1"/>
         </Property>
         <Property name="text" type="java.lang.String" value="?? de ?? del ????"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblHoraSistema">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Hora del Sistema"/>
       </Properties>
     </Component>
   </SubComponents>

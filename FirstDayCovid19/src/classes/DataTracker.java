@@ -9,11 +9,7 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.util.Comparator;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.table.DefaultTableModel;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.type.TypeReference;
 
@@ -21,7 +17,7 @@ import org.codehaus.jackson.type.TypeReference;
  *
  * @author migu_
  */
-public class DataTracker {
+public class DataTracker  {
     private static String COVID_API_URL = "https://api.covid19api.com/dayone/country/guatemala/status/confirmed";
     private List<Country> datos;
 
@@ -45,7 +41,7 @@ public class DataTracker {
         datos = mapper.readValue(response.body(), new TypeReference<List<Country>>() {});
         System.out.println("¡Datos descargados!");
     }
-
+    
     public List<Country> getCountries() {
         return datos;
     }
