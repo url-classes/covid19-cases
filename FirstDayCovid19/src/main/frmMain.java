@@ -18,7 +18,7 @@ public class frmMain extends javax.swing.JFrame {
     
     DataTracker rastreador = new DataTracker("guatemala"); // objeto que busca los datos de un país
     Reloj horaSistema = new Reloj(); // hilo que muestra la hora del sistema
-
+    Organizador hiloApi;
     /**
      * Creates new form frmMain
      */
@@ -116,13 +116,8 @@ public class frmMain extends javax.swing.JFrame {
 
     private void btnObtenerFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObtenerFechaActionPerformed
         // TODO add your handling code here:
-        try {
-            rastreador.descargarDatos();
-        } catch (IOException ex) {
-            Logger.getLogger(frmMain.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(frmMain.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        hiloApi = new Organizador();
+        hiloApi.start();
     }//GEN-LAST:event_btnObtenerFechaActionPerformed
 
     /**
@@ -189,6 +184,25 @@ public class frmMain extends javax.swing.JFrame {
                     Logger.getLogger(frmMain.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
+        }
+    }
+    
+    public class Organizador extends Thread{
+        
+        @Override
+        public void run(){
+            rastreador = new DataTracker(txtPais.getText());
+            
+        try {
+            rastreador.descargarDatos();
+            String fecha = rastreador.getDate().substring(0, 10);
+            lblFechaPrimerCaso.setText(fecha);
+        } catch (IOException ex) {
+            Logger.getLogger(frmMain.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(frmMain.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.out.println();
         }
     }
 
