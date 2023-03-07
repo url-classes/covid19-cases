@@ -49,6 +49,6 @@ public class Country {
         
     @Override
     public String toString() {
-        return String.valueOf(cases) + " en " + country;
+        return String.valueOf(cases) + " en " + country + " el ";
     }
 }
