@@ -15,14 +15,14 @@ import java.util.logging.Logger;
  * @author migu_
  */
 public class frmMain extends javax.swing.JFrame {
-    
-    DataTracker rastreador = new DataTracker("guatemala"); // objeto que busca los datos de un país
+    // objeto que busca los datos de un país
     Reloj horaSistema = new Reloj(); // hilo que muestra la hora del sistema
 
     /**
      * Creates new form frmMain
      */
     public frmMain() {
+        
         initComponents();
         horaSistema.start();
     }
@@ -41,7 +41,7 @@ public class frmMain extends javax.swing.JFrame {
         txtPais = new javax.swing.JTextField();
         btnObtenerFecha = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        lblFechaPrimerCaso = new javax.swing.JLabel();
+        lblFecha = new javax.swing.JLabel();
         lblHoraSistema = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -50,6 +50,12 @@ public class frmMain extends javax.swing.JFrame {
         jLabel1.setText("¿Cuándo se reportó el 1er caso de Covid-19?");
 
         jLabel2.setText("Ingrese el nombre del país:");
+
+        txtPais.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPaisActionPerformed(evt);
+            }
+        });
 
         btnObtenerFecha.setText("Obtener fecha");
         btnObtenerFecha.addActionListener(new java.awt.event.ActionListener() {
@@ -60,8 +66,8 @@ public class frmMain extends javax.swing.JFrame {
 
         jLabel3.setText("El primer caso de Covid-19 se reportó el:");
 
-        lblFechaPrimerCaso.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        lblFechaPrimerCaso.setText("?? de ?? del ????");
+        lblFecha.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        lblFecha.setText("?? de ?? del ????");
 
         lblHoraSistema.setText("Hora del Sistema");
 
@@ -84,7 +90,7 @@ public class frmMain extends javax.swing.JFrame {
                                     .addComponent(btnObtenerFecha)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(87, 87, 87)
-                        .addComponent(lblFechaPrimerCaso)))
+                        .addComponent(lblFecha)))
                 .addContainerGap(38, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -105,7 +111,7 @@ public class frmMain extends javax.swing.JFrame {
                 .addGap(48, 48, 48)
                 .addComponent(jLabel3)
                 .addGap(36, 36, 36)
-                .addComponent(lblFechaPrimerCaso)
+                .addComponent(lblFecha)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                 .addComponent(lblHoraSistema)
                 .addContainerGap())
@@ -115,7 +121,9 @@ public class frmMain extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnObtenerFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObtenerFechaActionPerformed
-        // TODO add your handling code here:
+        
+        String NmC=this.txtPais.getText();
+        DataTracker rastreador = new DataTracker(NmC); 
         try {
             rastreador.descargarDatos();
         } catch (IOException ex) {
@@ -123,7 +131,14 @@ public class frmMain extends javax.swing.JFrame {
         } catch (InterruptedException ex) {
             Logger.getLogger(frmMain.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        this.lblFecha.setText(rastreador.getCountries().get(0)+"");
+         System.out.println(rastreador.getCountries().get(0));
     }//GEN-LAST:event_btnObtenerFechaActionPerformed
+
+    private void txtPaisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPaisActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPaisActionPerformed
 
     /**
      * @param args the command line arguments
@@ -197,7 +212,7 @@ public class frmMain extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel lblFechaPrimerCaso;
+    private javax.swing.JLabel lblFecha;
     private javax.swing.JLabel lblHoraSistema;
     private javax.swing.JTextField txtPais;
     // End of variables declaration//GEN-END:variables

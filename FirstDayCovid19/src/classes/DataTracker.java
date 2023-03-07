@@ -17,7 +17,7 @@ import org.codehaus.jackson.type.TypeReference;
  *
  * @author migu_
  */
-public class DataTracker {
+public class DataTracker  {
     private static String COVID_API_URL = "https://api.covid19api.com/dayone/country/guatemala/status/confirmed";
     private List<Country> datos;
 
@@ -41,7 +41,7 @@ public class DataTracker {
         datos = mapper.readValue(response.body(), new TypeReference<List<Country>>() {});
         System.out.println("¡Datos descargados!");
     }
-
+    
     public List<Country> getCountries() {
         return datos;
     }
