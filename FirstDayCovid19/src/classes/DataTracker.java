@@ -9,6 +9,7 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.Date;
 import java.util.List;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.type.TypeReference;
@@ -20,6 +21,9 @@ import org.codehaus.jackson.type.TypeReference;
 public class DataTracker {
     private static String COVID_API_URL = "https://api.covid19api.com/dayone/country/guatemala/status/confirmed";
     private List<Country> datos;
+    private List<Date> fecha;
+    private String fecha1;
+    
 
     public DataTracker(String pais_a_buscar){
         COVID_API_URL = "https://api.covid19api.com/dayone/country/"+pais_a_buscar+"/status/confirmed";
@@ -40,9 +44,15 @@ public class DataTracker {
         // obtener listado de datos del país
         datos = mapper.readValue(response.body(), new TypeReference<List<Country>>() {});
         System.out.println("¡Datos descargados!");
+        System.out.println(datos.toString());
     }
 
     public List<Country> getCountries() {
         return datos;
+    }
+    
+    public List<Date> getDates(){
+        
+        return fecha;
     }
 }
