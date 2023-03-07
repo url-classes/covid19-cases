@@ -16,12 +16,30 @@ import java.util.logging.Logger;
 public class frmMain extends javax.swing.JFrame {
     
     DataTracker rastreador = new DataTracker("guatemala");
+    Country pais_seleccionado = new Country();
+    Fechador fechador = new Fechador();
 
     /**
      * Creates new form frmMain
      */
     public frmMain() {
         initComponents();
+    }
+    
+    public class Fechador extends Thread{
+        @Override
+        public void run(){
+            try {
+            rastreador = new DataTracker(txtPais.getText());
+            rastreador.descargarDatos();
+            pais_seleccionado = (Country) rastreador.getCountries().get(0);
+            lblFechaPrimerCaso.setText(pais_seleccionado.getDate());
+            } catch (IOException ex) {
+                Logger.getLogger(frmMain.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(frmMain.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
 
     /**
@@ -104,13 +122,8 @@ public class frmMain extends javax.swing.JFrame {
 
     private void btnObtenerFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObtenerFechaActionPerformed
         // TODO add your handling code here:
-        try {
-            rastreador.descargarDatos();
-        } catch (IOException ex) {
-            Logger.getLogger(frmMain.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(frmMain.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        fechador = new Fechador();
+        fechador.start();
     }//GEN-LAST:event_btnObtenerFechaActionPerformed
 
     /**

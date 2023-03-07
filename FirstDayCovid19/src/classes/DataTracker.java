@@ -42,8 +42,8 @@ public class DataTracker {
         System.out.println("¡Conexión exitosa! Descargando datos...");
         ObjectMapper mapper = new ObjectMapper();
         // obtener listado de datos del país
-        datos = mapper.readValue(response.body(), new TypeReference<List<Country>>() {});
         System.out.println("¡Datos descargados!");
+        datos =  mapper.readValue(response.body(), new TypeReference<List<Country>>() {});
     }
 
     public List<Country> getCountries() {
