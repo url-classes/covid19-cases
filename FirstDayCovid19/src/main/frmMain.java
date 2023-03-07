@@ -16,7 +16,7 @@ import java.util.logging.Logger;
  */
 public class frmMain extends javax.swing.JFrame {
     
-    DataTracker rastreador = new DataTracker("guatemala"); // objeto que busca los datos de un país
+    DataTracker rastreador = new DataTracker(""); // objeto que busca los datos de un país
     Reloj horaSistema = new Reloj(); // hilo que muestra la hora del sistema
 
     /**
@@ -50,6 +50,12 @@ public class frmMain extends javax.swing.JFrame {
         jLabel1.setText("¿Cuándo se reportó el 1er caso de Covid-19?");
 
         jLabel2.setText("Ingrese el nombre del país:");
+
+        txtPais.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPaisActionPerformed(evt);
+            }
+        });
 
         btnObtenerFecha.setText("Obtener fecha");
         btnObtenerFecha.addActionListener(new java.awt.event.ActionListener() {
@@ -123,7 +129,15 @@ public class frmMain extends javax.swing.JFrame {
         } catch (InterruptedException ex) {
             Logger.getLogger(frmMain.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        //lblFechaPrimerCaso.setText(rastreador.getDates() + "");
     }//GEN-LAST:event_btnObtenerFechaActionPerformed
+
+    private void txtPaisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPaisActionPerformed
+        // TODO add your handling code here:
+        String pais = txtPais.getText();
+        //DataTracker rastreador = new DataTracker(pais); // objeto que busca los datos de un país
+    }//GEN-LAST:event_txtPaisActionPerformed
 
     /**
      * @param args the command line arguments
