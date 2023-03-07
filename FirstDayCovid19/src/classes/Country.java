@@ -4,6 +4,7 @@
  */
 package classes;
 
+import java.util.Date;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties; // para seleccionar algunas propiedades del JSON
 import org.codehaus.jackson.annotate.JsonProperty; // para hacer match con las propiedades elegidas
 
@@ -18,7 +19,9 @@ public class Country {
     @JsonProperty("CountryCode")
     private String country_code;
     @JsonProperty("Cases")
-    private int cases;
+    private int cases; 
+    @JsonProperty("Date")
+    private Date date;
         
     public Country() {
     }
@@ -46,9 +49,17 @@ public class Country {
     public void setCases(int cases) {
         this.cases = cases;
     }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
         
     @Override
     public String toString() {
-        return String.valueOf(cases) + " en " + country + " el ";
+        return String.valueOf(cases) +" un caso en " + country + " el " + date;
     }
 }
